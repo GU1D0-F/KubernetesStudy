@@ -1,0 +1,13 @@
+#Kubectl label nodes <nodes-name> <label-key>=<label-value>
+#Kubectl label nodes node-1 size=large
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+spec:
+  containers:
+  - name: data-processor
+    image: data-processor
+  nodeSelector:
+    size: Large

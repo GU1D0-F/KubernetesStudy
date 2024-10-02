@@ -1,0 +1,15 @@
+apiVersion: v1
+#kubectl rollout status deployment/myapp-deployment
+
+
+#kubectl rollout history deployment/myapp-deployment
+
+
+#STRATEGY
+#Recreate = derruba e sobe tudo de uma vez
+#RollingUpdate = vai fazendo um pod por veez
+
+
+#ROLLBACK
+#kubectl rollout undo deployment/myapp-deployment
+

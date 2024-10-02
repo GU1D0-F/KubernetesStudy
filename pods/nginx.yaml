@@ -8,3 +8,5 @@ spec:
   containers:
   - name: nginx
     image: nginx
+#kubectl replace -f simple-webapp-2.yaml --force
+#kubectl logs -f <pod-name> <continer-name-if-mult-pod>
