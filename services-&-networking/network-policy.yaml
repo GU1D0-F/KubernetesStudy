@@ -1,0 +1,32 @@
+apiVersion: networking.k8s/v1
+kind: NetworkPolicy
+metadata:
+  name: db-policy
+spec:
+  podSelector:
+    matchLabels:
+      role: db
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          name: api-pod
+      namespaceSelector: #evita api pod de dev acesse db de producao por exemplo 
+        matchLabels: # a falta de um (-) antes de namespace funciona como um (AND) caso nao tenha funciona como (OR)
+          name: prod
+    - ipBlock: #caso houvesse um servidor de backup externo ao kubernte
+        cidr: 192.168.5.10/32
+    ports:
+    - protocol: TCP
+      port: 3306
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 192.168.5.10/32
+      #podSelector, namespaceSelector tambem funcionam aqui
+    ports:
+    - protocol: TCP
+      port: 80
